@@ -41,28 +41,28 @@ void ABuildPiece_S::spawnBlocks()
 		ABlock* b = nullptr;
 		switch (FMath::RandRange(1, 6)) {
 		case 1:
-			b = GetWorld()->SpawnActor<ABlockNormal>(this->GetActorLocation(), Rotation);
+			b = GetWorld()->SpawnActor<ABlockNormal>(Location, Rotation);
 			break;
 		case 2:
-			b = GetWorld()->SpawnActor<ABlockPiedra>(this->GetActorLocation(), Rotation);
+			b = GetWorld()->SpawnActor<ABlockPiedra>(Location, Rotation);
 			break;
 		case 3:
-			b = GetWorld()->SpawnActor<ABlockMadera>(this->GetActorLocation(), Rotation);
+			b = GetWorld()->SpawnActor<ABlockMadera>(Location, Rotation);
 			break;
 		case 4:
-			b = GetWorld()->SpawnActor<ABlockMetal>(this->GetActorLocation(), Rotation);
+			b = GetWorld()->SpawnActor<ABlockMetal>(Location, Rotation);
 			break;
 		case 5:
-			b = GetWorld()->SpawnActor<ABlockExplosivo>(this->GetActorLocation(), Rotation);
+			b = GetWorld()->SpawnActor<ABlockExplosivo>(Location, Rotation);
 			break;
 		case 6:
-			b = GetWorld()->SpawnActor<ABlockHielo>(this->GetActorLocation(), Rotation);
+			b = GetWorld()->SpawnActor<ABlockHielo>(Location, Rotation);
 			break;
 		}
 		Blocks.Add(b);
 		b->AttachToActor(this, FAttachmentTransformRules::KeepRelativeTransform);
 		b->SetActorRelativeLocation(FVector(0.0, s.first, s.second));
-		piece = GetWorld()->SpawnActor<APiece>(this->GetActorLocation(), Rotation, Location);
+		piece = GetWorld()->SpawnActor<APiece>(Location, Rotation);
 	}
 }
 
