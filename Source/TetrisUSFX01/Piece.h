@@ -30,7 +30,7 @@ public:
 
 	UPROPERTY()
 		class USceneComponent* SceneComponent;
-
+	void setBlocks(TArray<ABlock*> BlocksC);
 	void DrawDebugLines();
 	void TestRotate();
 	void MoveLeft();

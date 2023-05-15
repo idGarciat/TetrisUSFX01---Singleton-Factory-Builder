@@ -107,6 +107,15 @@ void APiece::EndPlay(const EEndPlayReason::Type EndPlayReason)
 //    Blocks.Empty();
 //}
 
+void APiece::setBlocks(TArray<ABlock*> BlocksC)
+{
+    ABlock* Block;
+    for (auto& i : BlocksC) {
+        Block = i;
+        Blocks.Add(Block);
+    }
+}
+
 void APiece::DrawDebugLines()
 {
     for (ABlock* B : Blocks)
