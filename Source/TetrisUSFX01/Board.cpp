@@ -200,7 +200,6 @@ void ABoard::NewPiece()
         }
         director->buildPiece();
         CurrentPiece = director->getPiece();
-        CurrentPiece = GetWorld()->SpawnActor<APiece>(Location, Rotation);
     } else {
         CurrentPiece = GetWorld()->SpawnActor<APiece>(Location, Rotation);
     }
