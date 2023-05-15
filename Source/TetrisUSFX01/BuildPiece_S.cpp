@@ -17,7 +17,6 @@ ABuildPiece_S::ABuildPiece_S()
 void ABuildPiece_S::BeginPlay()
 {
 	Super::BeginPlay();
-	spawnBlocks();
 }
 
 // Called every frame
@@ -64,7 +63,7 @@ void ABuildPiece_S::spawnBlocks()
 		b->SetActorRelativeLocation(FVector(0.0, s.first, s.second));
 	}
 	/*piece->setBlocks(Blocks);*/
-	/*piece = GetWorld()->SpawnActor<APiece>(APiece::StaticClass(), Location, Rotation);
-	piece->AttachToActor(this, FAttachmentTransformRules::KeepRelativeTransform);*/
+	piece = GetWorld()->SpawnActor<APiece>(APiece::StaticClass(), Location, Rotation);
+	piece->AttachToActor(this, FAttachmentTransformRules::KeepRelativeTransform);
 }
 
