@@ -115,20 +115,20 @@ void APiece::EndPlay(const EEndPlayReason::Type EndPlayReason)
 //    Blocks.Empty();
 //}
 
-void APiece::setBlocks(const std::vector<std::pair<float, float>>& BlocksC, std::vector<int> _tipoBlock)
-{
-    ABlock* Block;
-    int index = 0;
-    ADirectorPiece* director = GetWorld()->SpawnActor<ADirectorPiece>(ADirectorPiece::StaticClass());
-    for (auto i : BlocksC) {
-        Block = director->getBlock(_tipoBlock[index]);
-        index++;
-        Block->AttachToActor(this, FAttachmentTransformRules::KeepRelativeTransform);
-        Block->SetActorRelativeLocation(FVector(0.0, i.first, i.second));
-        Blocks.Add(Block);
-        setinsetBlocks(true);
-    }
-}
+//void APiece::setBlocks(const std::vector<std::pair<float, float>>& BlocksC, std::vector<int> _tipoBlock)
+//{
+//    ABlock* Block;
+//    int index = 0;
+//    ADirectorPiece* director = GetWorld()->SpawnActor<ADirectorPiece>(ADirectorPiece::StaticClass());
+//    for (auto i : BlocksC) {
+//        Block = director->getBlock(_tipoBlock[index]);
+//        index++;
+//        Block->AttachToActor(this, FAttachmentTransformRules::KeepRelativeTransform);
+//        Block->SetActorRelativeLocation(FVector(0.0, i.first, i.second));
+//        Blocks.Add(Block);
+//        setinsetBlocks(true);
+//    }
+//}
 
 void APiece::DrawDebugLines()
 {

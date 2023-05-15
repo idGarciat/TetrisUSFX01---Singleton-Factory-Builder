@@ -11,7 +11,7 @@ ABlockNormal::ABlockNormal()
 	{
 		BlockMesh->SetStaticMesh(BlockMeshAsset.Object);
 		BlockMesh->SetRelativeLocation(FVector(0.0, 5.0, 195.0));
-		/*BlockMesh->SetWorldScale3D(FVector(1.0f, 1.0f, 1.0f));*/
+		BlockMesh->SetWorldScale3D(FVector(1.0f, 1.0f, 1.0f));
 	} else {
 		UE_LOG(LogTemp, Warning, TEXT("No existe la malla para Block"));
 	}
