@@ -7,7 +7,14 @@
 #include "Block.h"
 #include "BlockHijo01.h"
 #include "BlockHijo02.h"
+#include "BlockExplosivo.h"
+#include "BlockMetal.h"
+#include "BlockMadera.h"
+#include "BlockNormal.h"
+#include "BlockPiedra.h"
+#include "BlockHielo.h"
 #include <functional>
+#include <vector>
 #include "Piece.generated.h"
 
 UCLASS()
@@ -30,7 +37,7 @@ public:
 
 	UPROPERTY()
 		class USceneComponent* SceneComponent;
-	void setBlocks(TArray<ABlock*> BlocksC);
+	void setBlocks(const std::vector<std::pair<float, float>>& BlocksC, std::vector<int> _tipoBlock);
 	void DrawDebugLines();
 	void TestRotate();
 	void MoveLeft();
@@ -45,7 +52,8 @@ public:
 private:
 
 	TArray<ABlock*> Blocks;
-	
+	bool insetBlocks = false;
+	void setinsetBlocks(bool _insetBlocks);
 public:
 	void SpawnBlocks();
 

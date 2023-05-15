@@ -17,6 +17,7 @@ void EmptyLinkFunctionForGeneratedCodeBuildPiece_I() {}
 	TETRISUSFX01_API UClass* Z_Construct_UClass_ABuildPiece_I();
 	ENGINE_API UClass* Z_Construct_UClass_AActor();
 	UPackage* Z_Construct_UPackage__Script_TetrisUSFX01();
+	ENGINE_API UClass* Z_Construct_UClass_USceneComponent_NoRegister();
 	TETRISUSFX01_API UClass* Z_Construct_UClass_UBuilderPiece_NoRegister();
 // End Cross Module References
 	void ABuildPiece_I::StaticRegisterNativesABuildPiece_I()
@@ -32,6 +33,11 @@ void EmptyLinkFunctionForGeneratedCodeBuildPiece_I() {}
 #if WITH_METADATA
 		static const UE4CodeGen_Private::FMetaDataPairParam Class_MetaDataParams[];
 #endif
+#if WITH_METADATA
+		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_SceneComponent_MetaData[];
+#endif
+		static const UE4CodeGen_Private::FObjectPropertyParams NewProp_SceneComponent;
+		static const UE4CodeGen_Private::FPropertyParamsBase* const PropPointers[];
 		static const UE4CodeGen_Private::FImplementedInterfaceParams InterfaceParams[];
 		static const FCppClassTypeInfoStatic StaticCppClassTypeInfo;
 		static const UE4CodeGen_Private::FClassParams ClassParams;
@@ -46,6 +52,16 @@ void EmptyLinkFunctionForGeneratedCodeBuildPiece_I() {}
 		{ "ModuleRelativePath", "BuildPiece_I.h" },
 	};
 #endif
+#if WITH_METADATA
+	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ABuildPiece_I_Statics::NewProp_SceneComponent_MetaData[] = {
+		{ "EditInline", "true" },
+		{ "ModuleRelativePath", "BuildPiece_I.h" },
+	};
+#endif
+	const UE4CodeGen_Private::FObjectPropertyParams Z_Construct_UClass_ABuildPiece_I_Statics::NewProp_SceneComponent = { "SceneComponent", nullptr, (EPropertyFlags)0x0010000000080008, UE4CodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(ABuildPiece_I, SceneComponent), Z_Construct_UClass_USceneComponent_NoRegister, METADATA_PARAMS(Z_Construct_UClass_ABuildPiece_I_Statics::NewProp_SceneComponent_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_ABuildPiece_I_Statics::NewProp_SceneComponent_MetaData)) };
+	const UE4CodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_ABuildPiece_I_Statics::PropPointers[] = {
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ABuildPiece_I_Statics::NewProp_SceneComponent,
+	};
 		const UE4CodeGen_Private::FImplementedInterfaceParams Z_Construct_UClass_ABuildPiece_I_Statics::InterfaceParams[] = {
 			{ Z_Construct_UClass_UBuilderPiece_NoRegister, (int32)VTABLE_OFFSET(ABuildPiece_I, IBuilderPiece), false },
 		};
@@ -58,11 +74,11 @@ void EmptyLinkFunctionForGeneratedCodeBuildPiece_I() {}
 		&StaticCppClassTypeInfo,
 		DependentSingletons,
 		nullptr,
-		nullptr,
+		Z_Construct_UClass_ABuildPiece_I_Statics::PropPointers,
 		InterfaceParams,
 		UE_ARRAY_COUNT(DependentSingletons),
 		0,
-		0,
+		UE_ARRAY_COUNT(Z_Construct_UClass_ABuildPiece_I_Statics::PropPointers),
 		UE_ARRAY_COUNT(InterfaceParams),
 		0x009000A4u,
 		METADATA_PARAMS(Z_Construct_UClass_ABuildPiece_I_Statics::Class_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UClass_ABuildPiece_I_Statics::Class_MetaDataParams))
@@ -76,7 +92,7 @@ void EmptyLinkFunctionForGeneratedCodeBuildPiece_I() {}
 		}
 		return OuterClass;
 	}
-	IMPLEMENT_CLASS(ABuildPiece_I, 2112009894);
+	IMPLEMENT_CLASS(ABuildPiece_I, 2120852948);
 	template<> TETRISUSFX01_API UClass* StaticClass<ABuildPiece_I>()
 	{
 		return ABuildPiece_I::StaticClass();

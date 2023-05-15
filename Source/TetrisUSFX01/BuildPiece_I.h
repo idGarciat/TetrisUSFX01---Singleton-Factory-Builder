@@ -34,4 +34,6 @@ public:
 	virtual void spawnBlocks() override;
 	class APiece* piece;
 	TArray<ABlock*> Blocks;
+	UPROPERTY()
+		class USceneComponent* SceneComponent;
 };

@@ -27,4 +27,5 @@ public:
 	class APiece* getPiece();
 	void setBuilder(AActor* newBuilder);
 	void buildPiece();
+	class ABlock* getBlock(int _num);
 };

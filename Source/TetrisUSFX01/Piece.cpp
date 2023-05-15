@@ -2,6 +2,7 @@
 
 
 #include "Piece.h"
+#include "DirectorPiece.h"
 #include "Components/SceneComponent.h"
 #include "Kismet/GameplayStatics.h"
 #include "DrawDebugHelpers.h"
@@ -62,38 +63,45 @@ void APiece::Tick(float DeltaTime)
 
 }
 
+void APiece::setinsetBlocks(bool _insetBlock)
+{
+    insetBlocks = _insetBlock;
+}
+
 void APiece::SpawnBlocks()
 {
-    std::vector<std::vector<std::pair<float, float>>> Shapes =
-    {
-        {{-20.0, 0.0}, {-10.0, 0.0}, {0.0, 0.0}, {10.0, 0.0}},
-        {{0.0, 10.0}, {0.0, 0.0}, {10.0, 0.0}, {20.0, 0.0}},
-        {{-20.0, 0.0}, {-10.0, 0.0}, {0.0, 0.0}, {0.0, 10.0}},
-        {{0.0, 0.0}, {10.0, 0.0}, {0.0, -10.0}, {10.0, -10.0}},
-        {{-10.0, -10.0}, {0.0, -10.0}, {0.0, 0.0}, {10.0, 0.0}},
-        {{-10.0, 0.0}, {0.0, 0.0}, {0.0, 10.0}, {10.0, 0.0}},
-        {{-10.0, 0.0}, {0.0, 0.0}, {0.0, -10.0}, {10.0, -10.0}},
-        /*{{-20.0, 10.0}, {-10.0, 0.0}, {0.0, 10.0}, {10.0, 0.0}},*/
-    };
-    const int Index = FMath::RandRange(0, Shapes.size() - 1);
-    UE_LOG(LogTemp, Warning, TEXT("index=%d"), Index);
-    const std::vector<std::pair<float, float>>& YZs = Shapes[Index];
-    for (auto&& YZ : YZs)
-    {
-        FRotator Rotation(0.0, 0.0, 0.0);
-        //ABlock* B = GetWorld()->SpawnActor<ABlock>(this->GetActorLocation(), Rotation);
-        ABlock* B = nullptr;
+    if (!insetBlocks) {
+        std::vector<std::vector<std::pair<float, float>>> Shapes =
+        {
+            {{-20.0, 0.0}, {-10.0, 0.0}, {0.0, 0.0}, {10.0, 0.0}},
+            {{0.0, 10.0}, {0.0, 0.0}, {10.0, 0.0}, {20.0, 0.0}},
+            {{-20.0, 0.0}, {-10.0, 0.0}, {0.0, 0.0}, {0.0, 10.0}},
+            {{0.0, 0.0}, {10.0, 0.0}, {0.0, -10.0}, {10.0, -10.0}},
+            {{-10.0, -10.0}, {0.0, -10.0}, {0.0, 0.0}, {10.0, 0.0}},
+            {{-10.0, 0.0}, {0.0, 0.0}, {0.0, 10.0}, {10.0, 0.0}},
+            {{-10.0, 0.0}, {0.0, 0.0}, {0.0, -10.0}, {10.0, -10.0}},
+            /*{{-20.0, 10.0}, {-10.0, 0.0}, {0.0, 10.0}, {10.0, 0.0}},*/
+        };
+        const int Index = FMath::RandRange(0, Shapes.size() - 1);
+        UE_LOG(LogTemp, Warning, TEXT("index=%d"), Index);
+        const std::vector<std::pair<float, float>>& YZs = Shapes[Index];
+        for (auto&& YZ : YZs)
+        {
+            FRotator Rotation(0.0, 0.0, 0.0);
+            //ABlock* B = GetWorld()->SpawnActor<ABlock>(this->GetActorLocation(), Rotation);
+            ABlock* B = nullptr;
 
-        if (FMath::RandRange(0, 1) == 0) {
-            B = GetWorld()->SpawnActor<ABlockHijo01>(this->GetActorLocation(), Rotation);
+            if (FMath::RandRange(0, 1) == 0) {
+                B = GetWorld()->SpawnActor<ABlockHijo01>(this->GetActorLocation(), Rotation);
+            }
+            else {
+                B = GetWorld()->SpawnActor<ABlockHijo02>(this->GetActorLocation(), Rotation);
+            }
+            B->BlockMesh->SetMaterial(1, Colors[Index]);
+            Blocks.Add(B);
+            B->AttachToActor(this, FAttachmentTransformRules::KeepRelativeTransform);
+            B->SetActorRelativeLocation(FVector(0.0, YZ.first, YZ.second));
         }
-        else {
-            B = GetWorld()->SpawnActor<ABlockHijo02>(this->GetActorLocation(), Rotation);
-        }
-        B->BlockMesh->SetMaterial(1, Colors[Index]);
-        Blocks.Add(B);
-        B->AttachToActor(this, FAttachmentTransformRules::KeepRelativeTransform);
-        B->SetActorRelativeLocation(FVector(0.0, YZ.first, YZ.second));
     }
 }
 
@@ -107,12 +115,18 @@ void APiece::EndPlay(const EEndPlayReason::Type EndPlayReason)
 //    Blocks.Empty();
 //}
 
-void APiece::setBlocks(TArray<ABlock*> BlocksC)
+void APiece::setBlocks(const std::vector<std::pair<float, float>>& BlocksC, std::vector<int> _tipoBlock)
 {
     ABlock* Block;
-    for (auto& i : BlocksC) {
-        Block = i;
+    int index = 0;
+    ADirectorPiece* director = GetWorld()->SpawnActor<ADirectorPiece>(ADirectorPiece::StaticClass());
+    for (auto i : BlocksC) {
+        Block = director->getBlock(_tipoBlock[index]);
+        index++;
+        Block->AttachToActor(this, FAttachmentTransformRules::KeepRelativeTransform);
+        Block->SetActorRelativeLocation(FVector(0.0, i.first, i.second));
         Blocks.Add(Block);
+        setinsetBlocks(true);
     }
 }
 

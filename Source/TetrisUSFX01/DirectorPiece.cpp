@@ -2,6 +2,13 @@
 
 
 #include "DirectorPiece.h"
+#include "BlockExplosivo.h"
+#include "BlockHielo.h"
+#include "BlockMetal.h"
+#include "BlockMadera.h"
+#include "BlockNormal.h"
+#include "BlockPiedra.h"
+
 
 // Sets default values
 ADirectorPiece::ADirectorPiece()
@@ -38,5 +45,31 @@ void ADirectorPiece::setBuilder(AActor* newBuilder)
 void ADirectorPiece::buildPiece()
 {
 	builder->spawnBlocks();
+}
+
+ABlock* ADirectorPiece::getBlock(int _num)
+{
+	switch (_num) {
+	case 1:
+		return GetWorld()->SpawnActor<ABlockNormal>(ABlockNormal::StaticClass());
+		break;
+	case 2:
+		return GetWorld()->SpawnActor<ABlockPiedra>(ABlockPiedra::StaticClass());
+		break;
+	case 3:
+		return GetWorld()->SpawnActor<ABlockMadera>(ABlockMadera::StaticClass());
+		break;
+	case 4:
+		return GetWorld()->SpawnActor<ABlockMetal>(ABlockMetal::StaticClass());
+		break;
+	case 5:
+		return GetWorld()->SpawnActor<ABlockExplosivo>(ABlockExplosivo::StaticClass());
+		break;
+	case 6:
+		return GetWorld()->SpawnActor<ABlockHielo>(ABlockExplosivo::StaticClass());
+		break;
+	default:
+		return nullptr;
+	}
 }
 

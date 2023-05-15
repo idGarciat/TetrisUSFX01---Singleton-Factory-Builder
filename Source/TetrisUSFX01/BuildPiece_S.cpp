@@ -36,7 +36,8 @@ void ABuildPiece_S::spawnBlocks()
 	const std::vector<std::pair<float, float>> shapes = { {0.0, 0.0}, {10.0, 0.0}, {0.0, -10.0}, {10.0, -10.0} };
 	FVector Location(0.0, 5.0, 195.0);
 	FRotator Rotation(0.0, 0.0, 0.0);
-	for (auto&& s : shapes) {
+	std::vector<int> tipoBlock;
+	for (auto& s : shapes) {
 		ABlock* b = nullptr;
 		switch (FMath::RandRange(1, 6)) {
 		case 1:
@@ -62,7 +63,7 @@ void ABuildPiece_S::spawnBlocks()
 		b->AttachToActor(this, FAttachmentTransformRules::KeepRelativeTransform);
 		b->SetActorRelativeLocation(FVector(0.0, s.first, s.second));
 	}
-	/*piece->setBlocks(Blocks);*/
+	/*piece->setBlocks(shapes, tipoBlock);*/
 	piece = GetWorld()->SpawnActor<APiece>(APiece::StaticClass(), Location, Rotation);
 	piece->AttachToActor(this, FAttachmentTransformRules::KeepRelativeTransform);
 }
